@@ -1,4 +1,8 @@
-<p align="center"> <img src="https://github-readme-stats.vercel.app/api?username=poomsc&show_icons=true&theme=gotham" alt="PoomSC" />
+<div align="center">
+<img height="137px" src="https://github-readme-stats.vercel.app/api?username=poomsc&show_icons=true&theme=gotham" alt="poomscStats" />
+
+<img height="137px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=anuraghazra&layout=compact&theme=gotham" alt="poomscMostUseLang">
+</div>
 
 # Getting Started with Create React App
 
