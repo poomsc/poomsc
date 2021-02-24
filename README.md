@@ -1,7 +1,4 @@
-<p align="center"> <img src="https://github-readme-stats.vercel.app/api?username=abhisheknaiidu&show_icons=true&theme=gotham" alt="PoomSC" />
-
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=poomsc&theme=react&show_icons=true)
-
+<p align="center"> <img src="https://github-readme-stats.vercel.app/api?username=poomsc&show_icons=true&theme=gotham" alt="PoomSC" />
 
 # Getting Started with Create React App
 
