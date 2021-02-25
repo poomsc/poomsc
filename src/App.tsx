@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import "./App.css";
+import ConnectWallet from "components/ConnectWallet";
+import Sidebar from "components/Sidebar";
+import { SidebarContext } from "context/sidebarContext";
+
 
 function App() {
+  const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      className={`flex h-screen bg-secondary dark:bg-gray-900 ${
+        isSidebarOpen && "overflow-hidden"
+      }`}
+    >
+      <Sidebar />
+      <div className="flex flex-1 flex-col w-full">
+        {/* <Navbar />
+          <Main>
+            <Dashboard />
+          </Main> */}
+      </div>
     </div>
   );
 }
