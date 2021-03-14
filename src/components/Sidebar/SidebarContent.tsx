@@ -1,14 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
-import UniverseLogo from "assets/images/testa-universe.svg";
-import EthLogo from "assets/images/Astronaut.svg";
-import memberIcon from "assets/icon/ic-member.svg";
-import copyIcon from "assets/icon/ic-copy.svg";
+import React, { useContext, useState } from "react";
 import { useClipboard } from "use-clipboard-copy";
 import { HiX } from "react-icons/hi";
 import { FiCopy } from "react-icons/fi";
-import { formatUnits } from "@ethersproject/units";
-import { contractName } from "constants/index";
-import { useContract } from "utils/web3CoreFunction";
 import { useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 import { SidebarContext } from "context/sidebarContext";
