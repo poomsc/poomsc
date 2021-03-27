@@ -3,8 +3,8 @@ import "./style.css";
 import { observer } from "mobx-react";
 import { useStores } from "hooks/useStore";
 
-const MenuHamburgerAnimation = observer(() => {
-  const { applicationStore } = useStores();
+const MenuHamburgerAnimation = observer((applicationStore) => {
+  const { setIsNavbarOpen } = applicationStore;
 
   const [isOpen, setIsOpen] = useState(false);
 
