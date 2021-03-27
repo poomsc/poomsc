@@ -1,29 +1,81 @@
-import React, { useContext } from "react";
-import { HiOutlineMenuAlt4, HiX } from "react-icons/hi";
-import { SidebarContext } from "context/sidebarContext";
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import MenuHamburgerAnimation from './MenuHamburgerAnimation';
+import { useStores } from 'hooks/useStore';
+// import ApplicationStore from "store/applicationStore"
 
-const Navbar = (): JSX.Element => {
-  const { toggleSidebar, isSidebarOpen } = useContext(SidebarContext);
+const useStyles = makeStyles({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
+});
+
+export default function Navbar() {
+  const classes = useStyles();
+  const { applicationStore } = useStores();
+
+
+  const toggleDrawer = (anchor:string, open:boolean) => (event:any) => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    applicationStore.setIsNavbarOpen(!applicationStore.isNavbarOpen)
+  };
+
+  const list = (anchor:string) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+      })}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>{index % 2 === 0 ? "InboxIcon": "MailIcon"}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>{index % 2 === 0 ? "InboxIcon" : "MailIcon" }</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
 
   return (
-    <header className="shadow-bottom z-20  bg-dark-gray dark:bg-gray-800 lg:hidden">
-      <div className="container flex items-center justify-between mx-auto px-6 h-full dark:text-purple-300 text-purple-600">
-        {/* <img src={UniverseLogo} className="w-16" /> */}
-        <button
-          className="focus:shadow-outline-purple -ml-1 mr-5 p-1 rounded-md focus:outline-none"
-          onClick={toggleSidebar}
-          aria-label="Menu"
-        >
-          {isSidebarOpen ? (
-            <HiX className="text-xl" />
-          ) : (
-            <HiOutlineMenuAlt4 className="text-xl" />
-          )}
-          {isSidebarOpen ? "Hello" : "world"}
-        </button>
-      </div>
-    </header>
+    <div>
+        <React.Fragment key={"left"}>
+          <Button onClick={toggleDrawer("left", true)}>{"left"}</Button>
+          <SwipeableDrawer
+            anchor="left"
+            open={applicationStore.isNavbarOpen}
+            onClose={toggleDrawer("left", false)}
+            onOpen={toggleDrawer("left", true)}
+          >
+            {list("left")}
+          </SwipeableDrawer>
+        </React.Fragment>
+    </div>
   );
-};
-
-export default Navbar;
+}

@@ -1,27 +1,17 @@
-import React, { useContext } from "react";
-import "./App.css";
-import ConnectWallet from "components/ConnectWallet";
-import Sidebar from "components/Sidebar";
-import { SidebarContext } from "context/sidebarContext";
-import Main from "container/Main";
+import React from "react";
+import { Web3ReactProvider } from "@web3-react/core";
+import getLibrary from "utils/getLibrary";
+import Routes from "routes/routes";
 import Navbar from "components/Navbar";
+import MenuHamburgerAnimation from "components/Navbar/MenuHamburgerAnimation";
 
 function App() {
-  const { isSidebarOpen } = useContext(SidebarContext);
   return (
-    <div
-      className={`flex h-screen bg-secondary dark:bg-gray-900 ${
-        isSidebarOpen && "overflow-hidden"
-      }`}
-    >
-      {/* <Sidebar /> */}
-      <div className="flex flex-1 flex-col w-full">
-        <Navbar />
-        <Main>
-          Hello world
-        </Main>
-      </div>
-    </div>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Navbar />
+      <MenuHamburgerAnimation />
+      <Routes />
+    </Web3ReactProvider>
   );
 }
 
